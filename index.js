@@ -13,7 +13,12 @@ rl.question("From what language do you want to translate? ",  (inputLanguage) =>
             let options = setOptions(query);
             let response = await getResponse(options);
 
-            console.log("\n" + response['translations'][0]['translatedText']);
+            if (response) {
+                let translatedText = response['translations'][0]['translatedText'];
+                console.log('\n' +translatedText);
+            } else {
+                console.log('\n' + 'Language not supported, try again.');
+            }
         });
     });
 });
