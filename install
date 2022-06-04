@@ -1,0 +1,46 @@
+#! /bin/bash
+
+npm install
+
+if(echo $SHELL | grep -q zsh)
+then
+    if (cat ~/.zshrc | grep -q "translateDir")
+    then
+        echo " "
+    else
+        echo "translateDir=\"$(pwd)\"" >> ~/.zshrc
+    fi
+
+    if (cat ~/.zshrc | grep -q "translate()")
+    then
+        echo ' '
+        echo '> Installed with success!'
+        echo '> Run "translate" to start the program.'
+    else
+        echo "function translate() { npm run start --prefix \$translateDir; }" >> ~/.zshrc
+        echo "function translate() { npm run start --prefix \$translateDir; }" >> ~/.bashrc
+        echo ' '
+        echo '> Installed with success!'
+        echo '> Restart your terminal to apply changes and run "translate" to start the program'
+    fi
+else
+    if (cat ~/.bashrc | grep -q "translateDir")
+    then
+        echo " "
+    else
+        echo "translateDir=\"$(pwd)\"" >> ~/.zshrc
+    fi
+
+    if (cat ~/.bashrc | grep -q "translate()")
+    then
+        echo ' '
+        echo '> Installed with success!'
+        echo '> Run "translate" to start the program.'
+    else
+        echo "function translate() { npm run start --prefix \$translateDir; }" >> ~/.bashrc
+        echo ' '
+        echo '> Installed with success!'
+        echo '> Restart your terminal to apply changes and run "translate" to start the program'
+    fi
+fi
+
